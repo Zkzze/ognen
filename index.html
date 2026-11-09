@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+  <script>document.documentElement.classList.add("js");</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Nexora.AI — образование за дигитален бизнис и вештачка интелигенција. Курсеви, менторство и консултации во Скопје.">
+  <meta name="theme-color" content="#24104A">
+  <meta property="og:title" content="Nexora.AI">
+  <meta property="og:description" content="Образование за дигитален бизнис и вештачка интелигенција.">
+  <meta property="og:type" content="website">
+  <title>Nexora.AI | AI и дигитален бизнис</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%235B21B6'/%3E%3Cpath d='M17 47V18h6.5l17 21V18H47v29h-6.5L23.5 26v21z' fill='%23fff'/%3E%3Cpath d='M44 8l2.4 6 6 2.4-6 2.4L44 25l-2.4-6.2-6-2.4 6-2.4z' fill='%23FFC43D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #24104a;
+      --navy-2: #170a33;
+      --ink: #1b1236;
+      --muted: #4d4466;
+      --mist: #f3eeff;
+      --line: #e4dafb;
+      --teal: #00a896;
+      --sun: #ffc43d;
+      --coral: #ff6b57;
+      --vio: #7c3aed;
+      --vio-deep: #6428c8;
+      --white: #fff;
+      --header: 72px;
+      --max: 1120px;
+      --shadow: 0 14px 36px rgba(36, 16, 74, 0.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      margin: 0;
+      font-family: Manrope, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.65;
+      font-size: 17px;
+      overflow-x: clip;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg { max-width: 100%; }
+    h1, h2, h3 {
+      font-family: Unbounded, Arial, sans-serif;
+      line-height: 1.15;
+      font-weight: 600;
+      text-wrap: balance;
+    }
+    h1 { font-weight: 800; }
+    p { margin: 0; }
+    a { color: inherit; }
+    button, input, select { font: inherit; color: inherit; }
+    :focus-visible { outline: 3px solid var(--vio); outline-offset: 3px; }
+    ::selection { background: var(--sun); color: var(--navy); }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -48px;
+      z-index: 80;
+      background: var(--sun);
+      color: var(--navy);
+      font-weight: 800;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+    }
+    .skip:focus { top: 12px; }
+
+    .wrap {
+      width: min(var(--max), 100%);
+      margin-inline: auto;
+      padding-inline: 20px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      height: var(--header);
+      color: #fff;
+      background: #24104a;
+      box-shadow: inset 0 -3px 0 #ffc43d;
+      transition: box-shadow 0.3s ease;
+    }
+    .site-header.is-scrolled { box-shadow: inset 0 -3px 0 #ffc43d, 0 10px 28px rgba(23, 10, 51, 0.28); }
+    .site-header :focus-visible { outline-color: var(--sun); }
+    .bar {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      text-decoration: none;
+      font-family: Unbounded, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -0.03em;
+    }
+    .logo svg { width: 38px; height: 38px; flex: none; animation: logo-in 0.7s cubic-bezier(.22, .7, .2, 1) both; }
+    .logo .dot { color: var(--sun); }
+
+    .menu-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .menu-btn span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: #fff;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-panel {
+      list-style: none;
+      margin: 0;
+      position: fixed;
+      z-index: 40;
+      top: var(--header);
+      left: 0;
+      right: 0;
+      height: calc(100dvh - var(--header));
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 18px 22px calc(24px + env(safe-area-inset-bottom));
+      background: #170a33;
+      overflow: auto;
+      overscroll-behavior: contain;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+    .nav-panel.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: none;
+    }
+    .nav-panel a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      padding: 13px 8px;
+      border-radius: 12px;
+      transition: color 0.2s ease;
+    }
+    .nav-panel a:hover,
+    .nav-panel a.is-active { color: var(--sun); }
+    .nav-cta { margin-top: 10px; align-self: flex-start; }
+    body.nav-open { overflow: hidden; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--sun);
+      color: var(--navy);
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .btn:hover { background: #fff; }
+    .btn.alt { background: transparent; color: #fff; border: 2px solid #fff; }
+    .btn.alt:hover { background: #fff; color: var(--navy); }
+    .btn.vio { background: var(--vio-deep); color: #fff; }
+    .btn.vio:hover { background: var(--navy); }
+    .btn.out { background: #fff; color: var(--vio-deep); border: 2px solid var(--vio-deep); }
+    .btn.out:hover { background: var(--vio-deep); color: #fff; }
+    .nav-cta.btn { min-height: 42px; padding: 8px 16px; }
+
+    .hero {
+      background:
+        radial-gradient(900px 420px at 100% -10%, rgba(124, 58, 237, 0.55), transparent 60%),
+        radial-gradient(700px 380px at -10% 110%, rgba(0, 168, 150, 0.28), transparent 55%),
+        var(--navy);
+      color: #fff;
+      padding: clamp(48px, 7vw, 84px) 0 clamp(56px, 8vw, 96px);
+      scroll-margin-top: 96px;
+    }
+    .hero-grid, .about-grid, .loc-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(28px, 4vw, 48px);
+      align-items: center;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--sun);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+    .hero h1 { margin: 0; font-size: clamp(32px, 5vw, 54px); }
+    .hero-lead { margin: 18px 0 0; max-width: 46ch; color: #ddd3f5; font-size: clamp(17px, 2vw, 19px); }
+    .hero-actions, .acts { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-actions { margin-top: 26px; }
+    .more {
+      display: inline-block;
+      margin-top: 16px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+    }
+    .more:hover { text-decoration: underline; }
+    .paybar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 26px;
+      color: #ddd3f5;
+      font-size: 14px;
+    }
+    .pay {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .pay i {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #eb001b;
+      box-shadow: 9px 0 0 #f79e1b;
+      margin-right: 9px;
+    }
+    .hero-art-wrap { width: min(100%, 460px); margin-inline: auto; animation: rise 0.9s cubic-bezier(.22, .7, .2, 1) 0.18s both; }
+    .hero-art, .about-art { width: min(100%, 460px); height: auto; margin-inline: auto; display: block; }
+    .hero-art { width: 100%; animation: floaty 7s ease-in-out infinite; }
+    .hero-copy > * { animation: rise 0.75s cubic-bezier(.22, .7, .2, 1) both; }
+    .hero-copy > *:nth-child(1) { animation-delay: 0.04s; }
+    .hero-copy > *:nth-child(2) { animation-delay: 0.12s; }
+    .hero-copy > *:nth-child(3) { animation-delay: 0.22s; }
+    .hero-copy > *:nth-child(4) { animation-delay: 0.32s; }
+    .hero-copy > *:nth-child(5) { animation-delay: 0.4s; }
+    .hero-copy > *:nth-child(6) { animation-delay: 0.48s; }
+
+    section { padding: clamp(64px, 8vw, 96px) 0; scroll-margin-top: 96px; }
+    section h2 { margin: 0 0 14px; font-size: clamp(26px, 3.4vw, 36px); }
+    .lead { max-width: 64ch; color: var(--muted); margin-bottom: 28px; }
+
+    .about-grid { align-items: center; }
+    .about-copy p + p { margin-top: 14px; }
+
+    .pros-cons, .card-grid, .who-grid, .prod-grid, .step-grid, .review-grid, .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+    .pros-cons { grid-template-columns: 1fr 1fr; gap: 22px; }
+    .box, .card, .prod, .step, .review, .contact-card, .who-card {
+      border-radius: var(--radius);
+    }
+    .box { padding: 26px 26px 18px; }
+    .box.pro { background: #e3f6f3; border-left: 8px solid var(--teal); }
+    .box.con { background: #ffebe7; border-left: 8px solid var(--coral); }
+    .box h3, .card h3, .who-card h3, .step h3 { margin: 0 0 10px; font-size: 18px; }
+    .box ul, .prod ul { margin: 0; padding-left: 18px; }
+    .box li, .prod li { margin: 0 0 8px; }
+
+    .band { background: var(--mist); }
+    .card-grid, .who-grid, .step-grid, .review-grid, .contact-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    }
+    .card, .who-card, .step, .review {
+      background: #fff;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .card svg { width: 54px; height: 54px; display: block; margin-bottom: 14px; }
+    .card p, .who-card p, .step p, .prod p, .review p { color: var(--muted); font-size: 15.5px; }
+    .who-card { box-shadow: none; border-top: 5px solid var(--sun); background: var(--mist); }
+    .who-grid { margin-top: 8px; }
+
+    .offer { background: linear-gradient(#fff, #f8f5ff); }
+    .prod-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px; }
+    .prod {
+      background: #fff;
+      border: 2px solid var(--line);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .prod.top { border-color: var(--vio); box-shadow: 0 12px 0 -6px #e4dafb; }
+    .tag {
+      align-self: flex-start;
+      background: var(--sun);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .prod h3 { margin: 0 0 6px; font-size: 20px; }
+    .kind { color: var(--vio-deep); font-weight: 800; font-size: 14px; margin-bottom: 10px; }
+    .prod ul { margin: 14px 0 18px; flex: 1; }
+    .price {
+      font-family: Unbounded, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      margin: 0 0 16px;
+    }
+    .price small { font-family: Manrope, Arial, sans-serif; font-weight: 600; font-size: 14px; color: #6b6285; }
+    .steps-title { margin-top: 56px; }
+    .step { background: #fff; border: 1px solid var(--line); box-shadow: none; }
+
+    .review p { margin: 10px 0 16px; color: var(--ink); }
+    .stars { color: #e39b00; font-size: 18px; letter-spacing: 2px; }
+    .review b { display: block; }
+    .review span { color: #6b6285; font-size: 14px; }
+
+    .loc-grid { align-items: start; grid-template-columns: 0.82fr 1.18fr; }
+    .loc-copy dl { margin: 18px 0 22px; }
+    .loc-copy dt { font-weight: 800; color: var(--vio-deep); margin-top: 12px; }
+    .loc-copy dd { margin: 0; }
+    .map {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 2px solid var(--line);
+      background: #ede7fa;
+      touch-action: pan-y;
+    }
+    .map.is-live { touch-action: none; }
+    .map svg { display: block; width: 100%; height: auto; cursor: grab; user-select: none; }
+    .map.is-live svg, .map svg:active { cursor: grabbing; }
+    .mctl {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .mctl button {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: #fff;
+      color: var(--navy);
+      font-size: 22px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+    }
+    .mctl button[aria-pressed="true"] { background: var(--sun); }
+    .map-note, .map-status { margin: 12px 0 0; color: var(--muted); font-size: 14.5px; }
+    .map-status { color: var(--vio-deep); font-weight: 700; }
+
+    .contact { background: var(--navy); color: #fff; }
+    .contact .lead { color: #ddd3f5; }
+    .contact-card {
+      border: 2px solid #4b3187;
+      padding: 20px;
+      min-width: 0;
+    }
+    .contact-card b { display: block; color: var(--sun); margin-bottom: 6px; }
+    .contact-card a { overflow-wrap: anywhere; }
+
+    footer {
+      background: var(--navy-2);
+      color: #b3a5dc;
+      padding: 22px 0 calc(22px + env(safe-area-inset-bottom));
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+    .footer-row a { color: #fff; font-weight: 700; text-decoration: none; }
+    footer svg { width: 22px; height: 22px; vertical-align: -5px; margin-right: 6px; }
+
+    .float {
+      position: fixed;
+      z-index: 20;
+      right: max(16px, env(safe-area-inset-right));
+      bottom: max(16px, env(safe-area-inset-bottom));
+      box-shadow: 0 10px 26px rgba(100, 40, 200, 0.35);
+      transition: transform 0.35s cubic-bezier(.22, .7, .2, 1), opacity 0.35s ease, visibility 0.35s;
+    }
+    .float.is-hidden,
+    body:has(dialog[open]) .float,
+    body.nav-open .float { visibility: hidden; pointer-events: none; opacity: 0; transform: translateY(18px); }
+    @media (max-width: 720px) {
+      .float { display: none; }
+    }
+
+    dialog {
+      border: 0;
+      padding: 0;
+      width: min(560px, calc(100% - 24px));
+      max-height: min(92dvh, 840px);
+      border-radius: 24px;
+      color: var(--ink);
+      box-shadow: 0 24px 80px rgba(23, 10, 51, 0.4);
+    }
+    dialog[open] { animation: pop 0.32s cubic-bezier(.22, .8, .2, 1); }
+    dialog::backdrop { background: rgba(23, 10, 51, 0.72); }
+    dialog[open]::backdrop { animation: fade 0.28s ease; }
+    .dlg { padding: 26px 24px 24px; }
+    .dlg-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    .dlg h2 { margin: 0 0 4px; font-size: 24px; }
+    .dlg-top p { color: var(--muted); font-size: 15px; }
+    .x {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--mist);
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      flex: none;
+    }
+    .dlg label { display: block; font-weight: 800; font-size: 14px; margin-top: 14px; }
+    .dlg input, .dlg select {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border: 2px solid #d9ccf7;
+      border-radius: 12px;
+      background: #fff;
+      font-size: 16px;
+    }
+    .pm { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .pm label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      padding: 12px;
+      border: 2px solid #d9ccf7;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .pm input { width: 18px; height: 18px; margin: 0; accent-color: var(--vio); }
+    .pm label:has(input:checked) { border-color: var(--vio); background: var(--mist); }
+    .total {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 18px 0;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .dlg .btn { width: 100%; }
+    .err { color: #c0341f; font-size: 14px; margin: 10px 0 0; min-height: 1.2em; }
+    .ok { text-align: center; padding: 28px 8px 8px; }
+    .ok h2 { color: var(--vio-deep); margin-bottom: 10px; }
+    .ok p { color: var(--muted); }
+    .ok .btn { width: auto; margin-top: 18px; }
+
+    @media (min-width: 980px) {
+      .menu-btn { display: none; }
+      .nav-panel {
+        position: static;
+        top: auto;
+        left: auto;
+        right: auto;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: none;
+        transition: none;
+      }
+      .nav-panel a { font-size: 14.5px; font-weight: 700; padding: 8px 8px; }
+      .nav-cta { margin: 0 0 0 8px; }
+      body.nav-open { overflow: auto; }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid, .about-grid, .loc-grid, .pros-cons { grid-template-columns: 1fr; }
+      .about-art { order: -1; }
+    }
+    @media (max-width: 560px) {
+      .hero-actions .btn, .acts .btn { flex: 1 1 100%; }
+      .pm { grid-template-columns: 1fr; }
+      .float-long { display: none; }
+      .float-short { display: inline; }
+      footer { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+    }
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 60;
+      width: 100%;
+      height: 3px;
+      transform: scaleX(0);
+      transform-origin: 0 50%;
+      background: linear-gradient(90deg, var(--sun), var(--teal), var(--coral));
+      pointer-events: none;
+    }
+    #pin {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      animation: pinbob 2.6s ease-in-out infinite;
+    }
+    @media (hover: hover) {
+      .btn { transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+      .btn:hover { transform: translateY(-2px); }
+      .card, .prod, .review { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+      .card:hover, .prod:hover, .review:hover { transform: translateY(-4px); }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .reveal:not(.is-in) { opacity: 0; transform: translateY(28px); }
+      .js .reveal.from-left:not(.is-in) { transform: translateX(-36px); }
+      .js .reveal.from-right:not(.is-in) { transform: translateX(36px); }
+      .js .reveal.is-in {
+        animation: rise 0.75s cubic-bezier(.22, .7, .2, 1) both;
+        animation-delay: calc(var(--d, 0) * 75ms);
+      }
+      .js .reveal.from-left.is-in { animation-name: rise-left; }
+      .js .reveal.from-right.is-in { animation-name: rise-right; }
+      .js .reveal.is-done { animation: none; }
+      .js .review.is-in .stars { animation: rise 0.45s ease 0.15s both; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    @media print {
+      .site-header, .float, .mctl, dialog { display: none !important; }
+      .hero, .contact, footer { background: #fff !important; color: #000 !important; }
+      .hero-lead, .contact .lead, .paybar { color: #000 !important; }
+    }
+    @keyframes floaty {
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes rise-left {
+      from { opacity: 0; transform: translateX(-36px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes rise-right {
+      from { opacity: 0; transform: translateX(36px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes logo-in {
+      from { opacity: 0; transform: rotate(-14deg) scale(0.7); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes pop {
+      from { opacity: 0; transform: translateY(16px) scale(0.97); }
+    }
+    @keyframes fade {
+      from { opacity: 0; }
+    }
+    @keyframes pinbob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+  <a class="skip" href="#main">Прескокни до содржината</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#A855F7"/>
+        <stop offset="1" stop-color="#5B21B6"/>
+      </linearGradient>
+      <symbol id="logo" viewBox="0 0 64 64">
+        <rect width="64" height="64" rx="18" fill="url(#lg)"/>
+        <path d="M17 47V18h6.5l17 21V18H47v29h-6.5L23.5 26v21z" fill="#fff"/>
+        <path d="M44 8l2.4 6 6 2.4-6 2.4L44 25l-2.4-6.2-6-2.4 6-2.4z" fill="#FFC43D"/>
+        <circle cx="14" cy="50" r="3" fill="#FFC43D"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="logo" href="#top"><svg aria-hidden="true"><use href="#logo"/></svg><span>Nexora<span class="dot">.AI</span></span></a>
+      <ul class="nav-panel" id="nav-menu">
+        <li><a href="#za-nas">За нас</a></li>
+        <li><a href="#biznis">Онлајн бизнис</a></li>
+        <li><a href="#ai">AI</a></li>
+        <li><a href="#ponuda">Понуда</a></li>
+        <li><a href="#mnenja">Мислења</a></li>
+        <li><a href="#lokacija">Локација</a></li>
+        <li><a href="#kontakt">Контакт</a></li>
+        <li><button class="btn nav-cta" type="button" data-order="termin">Резервирај термин</button></li>
+      </ul>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+        <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Мени</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Образование за млади · Скопје</p>
+          <h1>Nexora – AI &amp; Digital Business</h1>
+          <p class="hero-lead">Помагаме им на младите и идните генерации да го разберат светот на онлајн бизнисите и да ја искористат вештачката интелигенција за да градат посилни, попаметни проекти.</p>
+          <div class="hero-actions">
+            <button class="btn" type="button" data-order="kupi">Купи веднаш</button>
+            <button class="btn alt" type="button" data-order="termin">Резервирај термин</button>
+          </div>
+          <a class="more" href="#ponuda">Погледни ја целата понуда ↓</a>
+          <div class="paybar">Безбедно плаќање:
+            <span class="pay"><i></i>Mastercard</span>
+            <span class="pay">VISA</span>
+            <span class="pay">PayPal</span>
+            <span class="pay">Банкарска уплата</span>
+          </div>
+        </div>
+        <div class="hero-art-wrap">
+        <svg class="hero-art" viewBox="0 0 400 340" role="img" aria-label="Илустрација: лаптоп, онлајн продавница и чип со вештачка интелигенција">
+          <rect x="40" y="60" width="250" height="170" rx="14" fill="#3B1D7A"/>
+          <rect x="54" y="74" width="222" height="142" rx="8" fill="#F3EEFF"/>
+          <rect x="70" y="92" width="80" height="12" rx="6" fill="#0F1B3D"/>
+          <rect x="70" y="114" width="120" height="8" rx="4" fill="#BBA9E6"/>
+          <rect x="70" y="130" width="100" height="8" rx="4" fill="#BBA9E6"/>
+          <rect x="70" y="156" width="56" height="44" rx="8" fill="#00A896"/>
+          <rect x="134" y="156" width="56" height="44" rx="8" fill="#FFC43D"/>
+          <rect x="198" y="156" width="64" height="44" rx="8" fill="#FF6B57"/>
+          <polyline points="196,108 220,98 238,108 262,86" fill="none" stroke="#00A896" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 230h290l-18 30H38z" fill="#5B2FB5"/>
+          <rect x="250" y="150" width="120" height="120" rx="22" fill="#FFC43D"/>
+          <rect x="278" y="178" width="64" height="64" rx="12" fill="#0F1B3D"/>
+          <text x="310" y="219" text-anchor="middle" font-family="Unbounded,Arial" font-weight="800" font-size="26" fill="#FFC43D">AI</text>
+          <g stroke="#FFC43D" stroke-width="6" stroke-linecap="round"><path d="M270 150v-16M310 150v-22M350 150v-16M270 270v16M310 270v22M350 270v16M250 190h-16M250 230h-16M370 190h16M370 230h16"/></g>
+          <circle cx="350" cy="70" r="26" fill="#00A896"/>
+          <path d="M338 70l9 9 17-19" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="za-nas">
+      <div class="wrap about-grid">
+        <svg class="about-art reveal from-left" viewBox="0 0 360 300" role="img" aria-label="Илустрација: група млади луѓе што учат">
+          <rect width="360" height="300" rx="28" fill="#F3EEFF"/>
+          <circle cx="110" cy="110" r="34" fill="#FFC43D"/>
+          <rect x="72" y="150" width="76" height="90" rx="30" fill="#0F1B3D"/>
+          <circle cx="250" cy="120" r="30" fill="#FF6B57"/>
+          <rect x="216" y="156" width="68" height="84" rx="28" fill="#00A896"/>
+          <rect x="132" y="196" width="96" height="62" rx="8" fill="#fff" stroke="#0F1B3D" stroke-width="5"/>
+          <path d="M146 240l22-22 16 14 28-30" fill="none" stroke="#FF6B57" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="180" cy="48" r="16" fill="#0F1B3D"/>
+          <path d="M173 48h14M180 41v14" stroke="#FFC43D" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div class="about-copy reveal from-right">
+          <h2>Кои сме ние</h2>
+          <p>Nexora е образовна иницијатива посветена на дигиталниот бизнис и вештачката интелигенција. Веруваме дека секој млад човек треба да има можност да ги разбере алатките на иднината пред да стапи на пазарот на трудот.</p>
+          <p>Со едноставни објаснувања и практични примери ги водиме младите од првата идеја до првите чекори во сопствен онлајн бизнис – јасно, чесно и без непотребна сложеност.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="biznis">
+      <div class="wrap">
+        <h2 class="reveal">Како функционираат онлајн бизнисите</h2>
+        <p class="lead reveal">Онлајн бизнисот е секоја дејност што продава производи, услуги или знаење преку интернет – од веб-продавница и социјални мрежи до дигитални курсеви и фриленс. Пред да започнеш, важно е да ги познаваш и добрите и лошите страни.</p>
+        <div class="pros-cons">
+          <div class="box pro reveal">
+            <h3>Предности</h3>
+            <ul>
+              <li>Мали почетни трошоци во споредба со класичен бизнис.</li>
+              <li>Пазар без граници – клиенти од цел свет.</li>
+              <li>Работиш од каде сакаш и со флексибилно време.</li>
+              <li>Лесно мерење на резултатите и брзо прилагодување.</li>
+              <li>Можност да растеш чекор по чекор.</li>
+            </ul>
+          </div>
+          <div class="box con reveal">
+            <h3>Недостатоци</h3>
+            <ul>
+              <li>Голема конкуренција и тешко се издвојува.</li>
+              <li>Потребно е време за градење доверба кај клиентите.</li>
+              <li>Зависност од платформи и алгоритми што се менуваат.</li>
+              <li>Ризик од измами и прашања за безбедност на податоци.</li>
+              <li>Потребна е самодисциплина и континуирано учење.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="ai">
+      <div class="wrap">
+        <h2 class="reveal">Вештачката интелигенција како твој сојузник</h2>
+        <p class="lead reveal">AI не го заменува твојот труд – го множи. Ете како младите претприемачи можат да ја користат за да заштедат време и да носат подобри одлуки.</p>
+        <div class="card-grid">
+          <article class="card reveal">
+            <svg viewBox="0 0 54 54" aria-hidden="true"><rect width="54" height="54" rx="14" fill="#FFC43D"/><path d="M14 36l8-10 8 6 10-14" fill="none" stroke="#0F1B3D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Истражување на пазарот</h3>
+            <p>Анализирај трендови, конкуренти и потреби на клиентите за неколку минути.</p>
+          </article>
+          <article class="card reveal">
+            <svg viewBox="0 0 54 54" aria-hidden="true"><rect width="54" height="54" rx="14" fill="#00A896"/><path d="M15 16h24v16H27l-8 7v-7h-4z" fill="#fff"/></svg>
+            <h3>Содржина и маркетинг</h3>
+            <p>Создавај идеи за објави, описи на производи и рекламни текстови.</p>
+          </article>
+          <article class="card reveal">
+            <svg viewBox="0 0 54 54" aria-hidden="true"><rect width="54" height="54" rx="14" fill="#FF6B57"/><circle cx="27" cy="27" r="11" fill="none" stroke="#fff" stroke-width="4"/><path d="M27 21v6l4 3" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none"/></svg>
+            <h3>Автоматизација</h3>
+            <p>Препушти ги повторливите задачи на алатки и фокусирај се на креативното.</p>
+          </article>
+          <article class="card reveal">
+            <svg viewBox="0 0 54 54" aria-hidden="true"><rect width="54" height="54" rx="14" fill="#0F1B3D"/><path d="M16 38V24m11 14V16m11 22v-9" stroke="#FFC43D" stroke-width="6" stroke-linecap="round"/></svg>
+            <h3>Паметни одлуки</h3>
+            <p>Користи податоци за да ги подобриш цените, понудата и услугата кон клиентите.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2 class="reveal">За кого е Nexora</h2>
+        <div class="who-grid">
+          <article class="who-card reveal">
+            <h3>Ученици и студенти</h3>
+            <p>Кои сакаат да ги откријат можностите на дигиталниот бизнис уште рано.</p>
+          </article>
+          <article class="who-card reveal">
+            <h3>Млади претприемачи</h3>
+            <p>Кои веќе имаат идеја и сакаат да ја остварат со помош на AI алатки.</p>
+          </article>
+          <article class="who-card reveal">
+            <h3>Наставници и родители</h3>
+            <p>Кои сакаат да им помогнат на младите да ја разберат иднината безбедно и одговорно.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer" id="ponuda">
+      <div class="wrap">
+        <h2 class="reveal">Што нудиме</h2>
+        <p class="lead reveal">Nexora е образовна и консултантска компанија. Продаваме знаење и услуги: курсеви и работилници за млади, индивидуално менторство, дигитални материјали и бизнис-консултации. Сè е прилагодено за почетници, на македонски јазик.</p>
+        <div class="prod-grid">
+          <article class="prod reveal">
+            <span class="tag">Најпопуларно</span>
+            <h3>Старт во онлајн бизнис</h3>
+            <div class="kind">Работилница · 4 недели · на живо</div>
+            <p>Основен курс за ученици и студенти што сакаат да разберат како функционира онлајн бизнисот и да направат прв чекор.</p>
+            <ul>
+              <li>8 предавања од по 90 минути</li>
+              <li>Од идеја до прва веб-продавница</li>
+              <li>Основи на маркетинг и социјални мрежи</li>
+              <li>Ризици, измами и безбедност на плаќања</li>
+              <li>Сертификат за завршен курс</li>
+            </ul>
+            <div class="price">1.990 ден. <small>≈ 32 €</small></div>
+            <div class="acts">
+              <button class="btn vio" type="button" data-order="kupi" data-product="start">Купи веднаш</button>
+              <button class="btn out" type="button" data-order="termin" data-product="start">Резервирај термин</button>
+            </div>
+          </article>
+          <article class="prod top reveal">
+            <span class="tag">Нов</span>
+            <h3>AI Лабораторија</h3>
+            <div class="kind">Практичен курс · 6 недели · на живо и онлајн</div>
+            <p>Научи да ги користиш AI алатките за да заштедиш време, да создаваш содржина и да носиш подобри бизнис-одлуки.</p>
+            <ul>
+              <li>12 практични вежби со вистински алатки</li>
+              <li>Пишување прашања (промптови) што даваат резултат</li>
+              <li>Автоматизација на повторливи задачи</li>
+              <li>AI за маркетинг, истражување и услуга на клиенти</li>
+              <li>Финален проект и сертификат</li>
+            </ul>
+            <div class="price">3.800 ден. <small>≈ 62 €</small></div>
+            <div class="acts">
+              <button class="btn vio" type="button" data-order="kupi" data-product="ai">Купи веднаш</button>
+              <button class="btn out" type="button" data-order="termin" data-product="ai">Резервирај термин</button>
+            </div>
+          </article>
+          <article class="prod reveal">
+            <h3>Менторство 1:1</h3>
+            <div class="kind">Услуга · 60 минути по сесија</div>
+            <p>Лична средба со ментор што ќе ти помогне да ја развиеш твојата бизнис-идеја и да изградиш план за акција.</p>
+            <ul>
+              <li>Анализа на твојата идеја и целна група</li>
+              <li>Конкретен план за следните 30 дена</li>
+              <li>Преглед на твојот сајт или профил</li>
+              <li>Снимка од сесијата и забелешки</li>
+            </ul>
+            <div class="price">1.200 ден. <small>по сесија · ≈ 20 €</small></div>
+            <div class="acts">
+              <button class="btn vio" type="button" data-order="kupi" data-product="mentor">Купи веднаш</button>
+              <button class="btn out" type="button" data-order="termin" data-product="mentor">Резервирај термин</button>
+            </div>
+          </article>
+          <article class="prod reveal">
+            <h3>Дигитален пакет за млади претприемачи</h3>
+            <div class="kind">Дигитален производ · веднаш по уплата</div>
+            <p>Е-книга и збирка готови шаблони за оние што сакаат да учат сами, во свое темпо.</p>
+            <ul>
+              <li>Е-книга од 120 страници на македонски</li>
+              <li>30 шаблони: бизнис-план, цени, понуда</li>
+              <li>Листа од 50 AI алатки со објаснување</li>
+              <li>Доживотен пристап и бесплатни ажурирања</li>
+            </ul>
+            <div class="price">790 ден. <small>≈ 13 €</small></div>
+            <div class="acts">
+              <button class="btn vio" type="button" data-order="kupi" data-product="paket">Купи веднаш</button>
+            </div>
+          </article>
+          <article class="prod reveal">
+            <h3>AI и дигитално советување за бизниси</h3>
+            <div class="kind">Услуга за компании · по договор</div>
+            <p>Помагаме на мали фирми да се претстават онлајн и да воведат AI во секојдневната работа.</p>
+            <ul>
+              <li>Изработка на веб-страница и онлајн продавница</li>
+              <li>Поставување на AI асистент за прашања на клиенти</li>
+              <li>Автоматизација на нарачки и известувања</li>
+              <li>Обука на вашиот тим (4 часа)</li>
+            </ul>
+            <div class="price">од 12.000 ден. <small>≈ 195 €</small></div>
+            <div class="acts">
+              <button class="btn vio" type="button" data-order="termin" data-product="konsalting">Резервирај термин</button>
+              <button class="btn out" type="button" data-order="kupi" data-product="konsalting">Купи веднаш</button>
+            </div>
+          </article>
+        </div>
+
+        <h2 class="steps-title reveal">Како функционира купувањето</h2>
+        <div class="step-grid">
+          <article class="step reveal"><h3>1. Избери</h3><p>Одбери курс, услуга или дигитален пакет од понудата.</p></article>
+          <article class="step reveal"><h3>2. Плати безбедно</h3><p>Со картичка (Visa, Mastercard), PayPal, банкарска уплата или на лице место.</p></article>
+          <article class="step reveal"><h3>3. Добиј потврда</h3><p>Потврда и детали пристигнуваат на твојата е-пошта.</p></article>
+          <article class="step reveal"><h3>4. Учи и расти</h3><p>Започни со обуката и користи ја подршката на нашиот тим.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="mnenja">
+      <div class="wrap">
+        <h2 class="reveal">Што велат нашите ученици</h2>
+        <p class="lead reveal">Мислења од луѓе што веќе учеле со Nexora.</p>
+        <div class="review-grid">
+          <article class="review reveal">
+            <p class="stars" role="img" aria-label="Оценка 5 од 5">★★★★★</p>
+            <p>Не знаев ништо за онлајн продавање. По четири недели имам своја мала продавница и први нарачки. Објаснувањата се јасни и без сложени зборови.</p>
+            <b>Ана Стојановска</b><span>студентка, Скопје</span>
+          </article>
+          <article class="review reveal">
+            <p class="stars" role="img" aria-label="Оценка 5 од 5">★★★★★</p>
+            <p>AI Лабораторијата ми штеди часови секој ден. Сега текстовите за објави ги правам за 10 минути наместо за еден час.</p>
+            <b>Марко Трајковски</b><span>млад претприемач, Битола</span>
+          </article>
+          <article class="review reveal">
+            <p class="stars" role="img" aria-label="Оценка 5 од 5">★★★★★</p>
+            <p>Како родител се плашев од интернет-бизнисите, но предавачите отворено зборуваат и за ризиците. Мојата ќерка научи многу и тоа безбедно.</p>
+            <b>Елена Илиевска</b><span>родител, Куманово</span>
+          </article>
+          <article class="review reveal">
+            <p class="stars" role="img" aria-label="Оценка 4 од 5">★★★★☆</p>
+            <p>Менторството 1:1 ми го смени планот. Добив конкретни чекори и пријателска критика. Единствено би сакал сесиите да се подолги.</p>
+            <b>Давид Петровски</b><span>ученик, Тетово</span>
+          </article>
+          <article class="review reveal">
+            <p class="stars" role="img" aria-label="Оценка 5 од 5">★★★★★</p>
+            <p>Дигиталниот пакет вреди повеќе од цената. Шаблоните за понуда и цени ги користам секој ден во мојот фриленс.</p>
+            <b>Ивана Наумовска</b><span>фриленсер, Охрид</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="lokacija">
+      <div class="wrap loc-grid">
+        <div class="loc-copy reveal from-left">
+          <h2>Каде се наоѓаме</h2>
+          <p>Дојди во нашиот простор за средба, консултација или курс. Најави се однапред за да ти го резервираме терминот.</p>
+          <dl>
+            <dt>Адреса</dt>
+            <dd>ул. „Македонија“ бр. 24/2<br>1000 Скопје, Северна Македонија</dd>
+            <dt>Поштенски код</dt>
+            <dd>1000 Скопје</dd>
+            <dt>Телефон</dt>
+            <dd><a href="tel:+38976444842">+389 76 444 842</a></dd>
+            <dt>Работно време</dt>
+            <dd>Понеделник – петок: 09:00 – 18:00<br>Сабота: 10:00 – 14:00</dd>
+          </dl>
+          <a class="btn vio" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=41.9981,21.4254">Отвори во Google Maps</a>
+        </div>
+        <div>
+          <div class="map reveal from-right" id="map" tabindex="0" aria-label="Интерактивна мапа со локацијата на Nexora">
+            <svg id="msvg" viewBox="0 0 600 420" role="img" aria-label="Интерактивна мапа со локацијата на Nexora">
+              <g id="mg">
+                <rect x="-400" y="-300" width="1400" height="1020" fill="#EDE7FA"/>
+                <path d="M-400 250 C-100 200 150 330 380 270 S800 240 1000 300 L1000 345 C800 290 560 330 380 322 S-100 262 -400 305z" fill="#B9D7F5"/>
+                <rect x="40" y="40" width="150" height="110" rx="14" fill="#CDEBC9"/>
+                <rect x="420" y="60" width="130" height="90" rx="14" fill="#CDEBC9"/>
+                <g stroke="#fff" stroke-width="14" stroke-linecap="round" fill="none">
+                  <path d="M-100 110H700"/><path d="M-100 190H700"/><path d="M-100 380H700"/>
+                  <path d="M110 -100V520"/><path d="M300 -100V520"/><path d="M470 -100V520"/>
+                </g>
+                <g stroke="#fff" stroke-width="7" fill="none">
+                  <path d="M-100 150H700"/><path d="M205 -100V520"/><path d="M385 -100V520"/><path d="M-100 80H700"/>
+                </g>
+                <g fill="#D6C9F2">
+                  <rect x="125" y="125" width="60" height="45" rx="6"/>
+                  <rect x="320" y="125" width="50" height="45" rx="6"/>
+                  <rect x="215" y="210" width="70" height="40" rx="6"/>
+                  <rect x="400" y="205" width="55" height="45" rx="6"/>
+                  <rect x="130" y="395" width="60" height="30" rx="6"/>
+                </g>
+                <text x="500" y="312" font-family="Manrope,Arial" font-size="13" fill="#3B6FA8" font-style="italic">река Вардар</text>
+                <text x="40" y="104" font-family="Manrope,Arial" font-size="12" fill="#4F6F4C">парк</text>
+                <g id="pin" style="cursor:pointer">
+                  <ellipse cx="300" cy="172" rx="14" ry="5" fill="#0003"/>
+                  <path d="M300 170c-26-30-30-42-30-54a30 30 0 0160 0c0 12-4 24-30 54z" fill="#7C3AED" stroke="#fff" stroke-width="4"/>
+                  <circle cx="300" cy="116" r="11" fill="#FFC43D"/>
+                </g>
+                <g id="tip">
+                  <rect x="222" y="40" width="156" height="42" rx="10" fill="#fff" stroke="#7C3AED" stroke-width="2"/>
+                  <text x="300" y="58" text-anchor="middle" font-family="Unbounded,Arial" font-weight="800" font-size="12" fill="#24104A">Nexora</text>
+                  <text x="300" y="74" text-anchor="middle" font-family="Manrope,Arial" font-size="11" fill="#4D4466">ул. „Македонија“ 24/2, Скопје</text>
+                </g>
+              </g>
+            </svg>
+            <div class="mctl">
+              <button type="button" id="zin" aria-label="Зголеми">+</button>
+              <button type="button" id="zout" aria-label="Намали">−</button>
+              <button type="button" id="zre" aria-label="Врати" style="font-size:16px">⟲</button>
+              <button type="button" id="map-live" aria-pressed="false" aria-label="Движи ја мапата">✋</button>
+            </div>
+          </div>
+          <p class="map-note">Влечи со глувчето за да ја поместиш мапата. + и − зумираат. Копчето со дланка го вклучува движењето со прст и зумот со тркалце, без да го блокира скролот.</p>
+          <p class="map-status" id="map-status" hidden>Мапата е активна. Влечи, или зумирај со тркалцето. Esc или повторно дланката ја враќа нормалниот скрол.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="kontakt">
+      <div class="wrap">
+        <h2 class="reveal">Контакт</h2>
+        <p class="lead reveal">Имаш прашање, идеја или сакаш да соработуваме? Јави ни се.</p>
+        <div class="contact-grid">
+          <div class="contact-card reveal"><b>Е-пошта</b><a href="mailto:stojcevskibrane44@gmail.com">stojcevskibrane44@gmail.com</a></div>
+          <div class="contact-card reveal"><b>Телефон</b><a href="tel:+38976444842">+389 76 444 842</a></div>
+          <div class="contact-card reveal"><b>Адреса</b>ул. „Македонија“ бр. 24/2, 1000 Скопје</div>
+          <div class="contact-card reveal"><b>Профили</b>nexora.AI</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row reveal">
+      <p><svg aria-hidden="true"><use href="#logo"/></svg>© 2026 Nexora – AI &amp; Digital Business. Сите права се задржани.</p>
+      <a href="#top">Нагоре</a>
+    </div>
+  </footer>
+
+  <dialog id="dlg" aria-labelledby="dt">
+    <div class="dlg">
+      <form id="order-form">
+        <div class="dlg-top">
+          <div>
+            <h2 id="dt">Нарачка</h2>
+            <p id="ds">Пополни ги податоците и избери начин на плаќање.</p>
+          </div>
+          <button class="x" type="button" id="close-dlg" aria-label="Затвори">×</button>
+        </div>
+        <label>Производ или услуга<select id="prod"></select></label>
+        <label id="dwrap">Посакуван термин<input type="datetime-local" id="date"></label>
+        <label>Име и презиме<input id="name" autocomplete="name"></label>
+        <label>Е-пошта<input id="mail" type="email" autocomplete="email" inputmode="email"></label>
+        <label>Телефон<input id="tel" type="tel" autocomplete="tel" inputmode="tel"></label>
+        <span style="display:block;font-weight:800;font-size:14px;margin-top:14px">Начин на плаќање</span>
+        <div class="pm">
+          <label><input type="radio" name="pay" value="Картичка (Visa / Mastercard)" checked>Картичка</label>
+          <label><input type="radio" name="pay" value="PayPal">PayPal</label>
+          <label><input type="radio" name="pay" value="Банкарска уплата">Банкарска уплата</label>
+          <label><input type="radio" name="pay" value="На лице место">На лице место</label>
+        </div>
+        <div class="total"><span>Вкупно</span><span id="tot">—</span></div>
+        <button class="btn vio" type="submit" id="go">Потврди</button>
+        <p class="err" id="err" role="alert"></p>
+      </form>
+      <div class="ok" id="ok" hidden>
+        <h2>Благодариме!</h2>
+        <p id="okt"></p>
+        <button class="btn vio" type="button" id="ok-close">Затвори</button>
+      </div>
+    </div>
+  </dialog>
+
+  <button class="btn vio float is-hidden" type="button" data-order="termin" aria-label="Резервирај термин">
+    <span class="float-long">Резервирај термин</span>
+    <span class="float-short">Термин</span>
+  </button>
+
+  <script>
+    const PRODUCTS = {
+      start: { name: "Старт во онлајн бизнис", price: 1990, session: false },
+      ai: { name: "AI Лабораторија", price: 3800, session: false },
+      mentor: { name: "Менторство 1:1", price: 1200, session: true },
+      paket: { name: "Дигитален пакет за млади претприемачи", price: 790, session: false },
+      konsalting: { name: "AI и дигитално советување за бизниси (од)", price: 12000, session: true }
+    };
+
+    const header = document.querySelector(".site-header");
+    const menuBtn = document.querySelector(".menu-btn");
+    const navPanel = document.getElementById("nav-menu");
+    const desktopNav = matchMedia("(min-width: 980px)");
+    const dlg = document.getElementById("dlg");
+    const form = document.getElementById("order-form");
+    const okBox = document.getElementById("ok");
+    const sel = document.getElementById("prod");
+    const err = document.getElementById("err");
+    let mode = "kupi";
+    let lastFocus = null;
+
+    for (const key of Object.keys(PRODUCTS)) {
+      const option = document.createElement("option");
+      option.value = key;
+      option.textContent = PRODUCTS[key].name;
+      sel.appendChild(option);
+    }
+
+    function formatDenars(value) {
+      return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " ден.";
+    }
+
+    function refreshOrder() {
+      const product = PRODUCTS[sel.value];
+      document.getElementById("tot").textContent = formatDenars(product.price);
+      document.getElementById("dwrap").hidden = mode !== "termin";
+      document.getElementById("dt").textContent = mode === "termin" ? "Резервирај термин" : "Купи веднаш";
+      document.getElementById("go").textContent = mode === "termin" ? "Резервирај" : "Потврди нарачка";
+    }
+
+    function openOrder(nextMode, id) {
+      mode = nextMode === "termin" ? "termin" : "kupi";
+      if (id && PRODUCTS[id]) sel.value = id;
+      else if (mode === "termin" && !PRODUCTS[sel.value].session) sel.value = "mentor";
+      form.hidden = false;
+      okBox.hidden = true;
+      err.textContent = "";
+      const date = document.getElementById("date");
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      date.min = now.toISOString().slice(0, 16);
+      refreshOrder();
+      closeMenu();
+      lastFocus = document.activeElement;
+      dlg.showModal();
+      sel.focus();
+    }
+
+    sel.addEventListener("change", refreshOrder);
+    form.addEventListener("input", () => { err.textContent = ""; });
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("mail").value.trim();
+      const phone = document.getElementById("tel").value.trim();
+      const when = document.getElementById("date").value;
+      if (!name || !/^\S+@\S+\.\S+$/.test(email)) {
+        err.textContent = "Внеси име и валидна е-пошта.";
+        document.getElementById(name ? "mail" : "name").focus();
+        return;
+      }
+      if (phone && phone.replace(/\D/g, "").length < 6) {
+        err.textContent = "Внеси валиден телефон или остави го празно.";
+        document.getElementById("tel").focus();
+        return;
+      }
+      if (mode === "termin" && !when) {
+        err.textContent = "Избери посакуван термин.";
+        document.getElementById("date").focus();
+        return;
+      }
+      const pay = document.querySelector('input[name="pay"]:checked').value;
+      const slot = mode === "termin" ? " Термин: " + when.replace("T", " ") + "." : "";
+      document.getElementById("okt").textContent =
+        (mode === "termin" ? "Твојата резервација за „" : "Твојата нарачка за „") +
+        PRODUCTS[sel.value].name + "“ е примена. Потврда ќе добиеш на " + email +
+        ". Начин на плаќање: " + pay + "." + slot;
+      form.hidden = true;
+      okBox.hidden = false;
+    });
+
+    function closeDialog() {
+      dlg.close();
+    }
+    document.getElementById("close-dlg").addEventListener("click", closeDialog);
+    document.getElementById("ok-close").addEventListener("click", closeDialog);
+    dlg.addEventListener("click", (event) => {
+      if (event.target === dlg) dlg.close();
+    });
+    dlg.addEventListener("close", () => {
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    });
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-order]");
+      if (!trigger) return;
+      openOrder(trigger.dataset.order, trigger.dataset.product || "");
+    });
+
+    function closeMenu() {
+      navPanel.classList.remove("is-open");
+      menuBtn.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-open");
+      navPanel.inert = !desktopNav.matches;
+    }
+    function openMenu() {
+      navPanel.classList.add("is-open");
+      menuBtn.setAttribute("aria-expanded", "true");
+      document.body.classList.add("nav-open");
+      navPanel.inert = false;
+    }
+    menuBtn.addEventListener("click", () => {
+      if (menuBtn.getAttribute("aria-expanded") === "true") closeMenu();
+      else openMenu();
+    });
+    navPanel.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu();
+    });
+    function syncNav() {
+      if (desktopNav.matches) closeMenu();
+      else if (!navPanel.classList.contains("is-open")) navPanel.inert = true;
+    }
+    syncNav();
+    desktopNav.addEventListener("change", syncNav);
+
+    const navLinks = [...navPanel.querySelectorAll('a[href^="#"]')];
+    const sections = navLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+    if ("IntersectionObserver" in window) {
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((link) => {
+            link.classList.toggle("is-active", link.getAttribute("href") === "#" + entry.target.id);
+          });
+        });
+      }, { rootMargin: "-45% 0px -45% 0px", threshold: 0.01 });
+      sections.forEach((section) => spy.observe(section));
+    }
+
+    const progress = document.getElementById("scroll-progress");
+    let scrollTick = false;
+    function paintProgress() {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const amount = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+      progress.style.transform = "scaleX(" + amount + ")";
+    }
+    addEventListener("scroll", () => {
+      if (scrollTick) return;
+      scrollTick = true;
+      requestAnimationFrame(() => {
+        header.classList.toggle("is-scrolled", scrollY > 8);
+        paintProgress();
+        revealCheck();
+        scrollTick = false;
+      });
+    }, { passive: true });
+    paintProgress();
+
+    const revealNodes = [...document.querySelectorAll(".reveal")];
+    const seen = new Map();
+    revealNodes.forEach((el) => {
+      const count = seen.get(el.parentElement) || 0;
+      el.style.setProperty("--d", String(count));
+      seen.set(el.parentElement, count + 1);
+    });
+    const motionOK = matchMedia("(prefers-reduced-motion: no-preference)").matches;
+    const pending = new Set(revealNodes);
+    function revealCheck() {
+      const line = innerHeight * 0.9;
+      pending.forEach((el) => {
+        if (el.getBoundingClientRect().top > line) return;
+        el.classList.add("is-in");
+        pending.delete(el);
+      });
+    }
+    if (motionOK) {
+      revealNodes.forEach((el) => {
+        el.addEventListener("animationend", (event) => {
+          if (event.target !== el || !String(event.animationName).startsWith("rise")) return;
+          el.classList.add("is-done");
+        });
+      });
+      revealCheck();
+      addEventListener("resize", revealCheck);
+    } else {
+      revealNodes.forEach((el) => el.classList.add("is-in", "is-done"));
+    }
+
+    const floatBtn = document.querySelector(".float");
+    const floatWatch = { hero: true, footer: false };
+    function syncFloat() {
+      floatBtn.classList.toggle("is-hidden", floatWatch.hero || floatWatch.footer);
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        floatWatch.hero = entry.isIntersecting;
+        syncFloat();
+      }, { threshold: 0.25 }).observe(document.querySelector(".hero"));
+      new IntersectionObserver(([entry]) => {
+        floatWatch.footer = entry.isIntersecting;
+        syncFloat();
+      }, { threshold: 0.15 }).observe(document.querySelector("footer"));
+    }
+    syncFloat();
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || dlg.open) return;
+      if (navPanel.classList.contains("is-open")) closeMenu();
+      else if (map.classList.contains("is-live")) setMapLive(false);
+    });
+
+    const map = document.getElementById("map");
+    const mapGroup = document.getElementById("mg");
+    const mapSvg = document.getElementById("msvg");
+    const mapStatus = document.getElementById("map-status");
+    const liveBtn = document.getElementById("map-live");
+    const tip = document.getElementById("tip");
+    const view = { x: 0, y: 0, k: 1 };
+    const pointers = new Map();
+    let pinch = 0;
+    let dragged = false;
+    let frame = 0;
+
+    function paintMap() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        mapGroup.setAttribute("transform", "translate(" + view.x + " " + view.y + ") scale(" + view.k + ")");
+      });
+    }
+    function zoomMap(factor, cx, cy) {
+      cx = cx === undefined ? 300 : cx;
+      cy = cy === undefined ? 210 : cy;
+      const next = Math.min(3, Math.max(0.7, view.k * factor));
+      const ratio = next / view.k;
+      view.x = cx - (cx - view.x) * ratio;
+      view.y = cy - (cy - view.y) * ratio;
+      view.k = next;
+      paintMap();
+    }
+    function resetMap() {
+      view.x = 0;
+      view.y = 0;
+      view.k = 1;
+      paintMap();
+    }
+    function pointInMap(event) {
+      const rect = mapSvg.getBoundingClientRect();
+      return {
+        x: (event.clientX - rect.left) * 600 / rect.width,
+        y: (event.clientY - rect.top) * 420 / rect.height
+      };
+    }
+    function setMapLive(on) {
+      map.classList.toggle("is-live", on);
+      liveBtn.setAttribute("aria-pressed", String(on));
+      liveBtn.setAttribute("aria-label", on ? "Готово со мапата" : "Движи ја мапата");
+      mapStatus.hidden = !on;
+    }
+
+    document.getElementById("zin").addEventListener("click", () => zoomMap(1.3));
+    document.getElementById("zout").addEventListener("click", () => zoomMap(1 / 1.3));
+    document.getElementById("zre").addEventListener("click", resetMap);
+    liveBtn.addEventListener("click", () => setMapLive(!map.classList.contains("is-live")));
+
+    mapSvg.addEventListener("pointerdown", (event) => {
+      const touchLocked = event.pointerType !== "mouse" && !map.classList.contains("is-live");
+      if (touchLocked) return;
+      pointers.set(event.pointerId, pointInMap(event));
+      mapSvg.setPointerCapture(event.pointerId);
+      dragged = false;
+      if (pointers.size === 2) {
+        const [a, b] = [...pointers.values()];
+        pinch = Math.hypot(a.x - b.x, a.y - b.y);
+      }
+    });
+    mapSvg.addEventListener("pointermove", (event) => {
+      if (!pointers.has(event.pointerId)) return;
+      const next = pointInMap(event);
+      const prev = pointers.get(event.pointerId);
+      if (Math.hypot(next.x - prev.x, next.y - prev.y) > 3) dragged = true;
+      pointers.set(event.pointerId, next);
+      const pts = [...pointers.values()];
+      if (pts.length >= 2) {
+        const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+        if (pinch) {
+          zoomMap(dist / pinch, (pts[0].x + pts[1].x) / 2, (pts[0].y + pts[1].y) / 2);
+        }
+        pinch = dist;
+        return;
+      }
+      view.x += next.x - prev.x;
+      view.y += next.y - prev.y;
+      paintMap();
+    });
+    function endPointer(event) {
+      pointers.delete(event.pointerId);
+      if (pointers.size < 2) pinch = 0;
+    }
+    mapSvg.addEventListener("pointerup", endPointer);
+    mapSvg.addEventListener("pointercancel", endPointer);
+    mapSvg.addEventListener("wheel", (event) => {
+      if (!map.classList.contains("is-live") && !event.ctrlKey && !event.metaKey) return;
+      event.preventDefault();
+      const p = pointInMap(event);
+      zoomMap(event.deltaY < 0 ? 1.12 : 1 / 1.12, p.x, p.y);
+    }, { passive: false });
+    map.addEventListener("keydown", (event) => {
+      const step = 28;
+      if (event.key === "+" || event.key === "=") zoomMap(1.25);
+      else if (event.key === "-" || event.key === "_") zoomMap(1 / 1.25);
+      else if (event.key === "0") resetMap();
+      else if (event.key === "ArrowLeft") view.x += step;
+      else if (event.key === "ArrowRight") view.x -= step;
+      else if (event.key === "ArrowUp") view.y += step;
+      else if (event.key === "ArrowDown") view.y -= step;
+      else return;
+      paintMap();
+      event.preventDefault();
+    });
+    document.getElementById("pin").addEventListener("click", () => {
+      if (dragged) return;
+      tip.style.display = tip.style.display === "none" ? "" : "none";
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!map.contains(event.target)) setMapLive(false);
+    });
+  </script>
+</body>
+</html>
